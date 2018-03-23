@@ -2,6 +2,8 @@
 @import '_mixins';
 @import '_vars';
 @import '_pe-icon-7-stroke';
+@import "_font-awesome.min";
+@import '_slick';
 *{
 	box-sizing: border-box;
 }
@@ -25,67 +27,69 @@ body{
 	max-width: 1110px;
 	width: 96%;
 	margin: 0 auto;
-	.logo {
-		vertical-align: middle;
-	    display: inline-block;
-	    transition: opacity .25s ease;
-	    width: 160px;
-	    font: $text-font-bold;
-	    color: $text-color;
-	    letter-spacing: 3px;
-	    text-transform: uppercase;
-	    text-decoration: none;
-		&:hover,
-		&:focus,
-		&:active{
-			opacity: .7;
-		}
+}
+.logo {
+	vertical-align: middle;
+	display: inline-block;
+	transition: opacity .25s ease;
+	width: 200px;
+	max-height: 48px;
+	font: $text-font-bold;
+	color: $text-color;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	text-decoration: none;
+	overflow: hidden;
+	&:hover,
+	&:focus,
+	&:active{
+		opacity: .7;
 	}
-	nav {
-		display: inline-block;
-		width: calc(100% - 205px);
-		.menu{
-			margin: 0;
-			padding: 0;
-			text-align: right;
-			&__item{
-				display: inline-block;
-				vertical-align: middle;
-				& a{
-					text-decoration: none;
-					text-transform: uppercase;
-					color: $text-color;
-					font:$text-aleo-r;
-					padding-top: 10px;
-					transition: opacity .25s ease;
-					&:hover,
-					&:focus,
-					&:active{
-						opacity: .7;
-					}
+}
+nav {
+	display: inline-block;
+	width: calc(100% - 205px);
+	.menu{
+		margin: 0;
+		padding: 0;
+		text-align: right;
+		&__item{
+			display: inline-block;
+			vertical-align: middle;
+			max-width: 120px;
+			max-height: 48px;
+			overflow: hidden;
+			& a{
+				text-decoration: none;
+				text-transform: uppercase;
+				color: $text-color;
+				font:$text-aleo-r;
+				padding-top: 10px;
+				transition: opacity .25s ease;
+				&:hover,
+				&:focus,
+				&:active{
+					opacity: .7;
 				}
 			}
-			&__item:not(:first-of-type){
-				margin-left: 35px;
-			}
+		}
+		&__item:not(:first-of-type){
+			margin-left: 35px;
 		}
 	}
 }
 .section{
 	&--heading{
-		background: url('../img/header.jpg') no-repeat 0 0;
-		background-size: cover;
+		@include background-image('../img/header.jpg');
 		min-height: 100vh;
 		position: relative;
 		& .container{
 			height: 100vh;
-			// @include flex-d(flex, space-between, column);
 			padding: 15% 0;
 		}
 	}
 	&--choose{
-		background: url('../img/choose.jpg') no-repeat 0 0;
-		background-size: cover;
+		@include background-image('../img/choose.jpg');
 		& .container{
 			height: 100%;
 			@include flex-d(flex, space-between, row);
@@ -94,31 +98,34 @@ body{
 	}
 	&--icons{
 		& .container{
+			@include background-image('../img/shape.png');
+			background-position: 120px 30px;
+			background-size: 77%; 
 			height: 100%;
 			@include flex-d(flex, space-between, row);
 			padding: 100px 0 100px;
 		}
 	}	
 	&--house{
-		background: url('../img/spain.jpg') no-repeat 0 0;
-		background-size: cover;
+		@include background-image('../img/spain.jpg');
 		& .container{
 			height: 100%;
 			padding: 100px 0;
+			display: flex;
+			justify-content: flex-start;
 		}
 	}
 	&--mountin{
-		background: url('../img/spain2.jpg') no-repeat 0 0;
-		background-size: cover;
+		@include background-image('../img/spain2.jpg');
 		& .container{
 			height: 100%;
 			padding: 100px 0;
-			// position: relative;
+			display: flex;
+			justify-content: flex-end;
 		}
 	}
 	&--turist{
-		background: url('../img/turist_bg.jpg') no-repeat 0 0;
-		background-size: cover;
+		@include background-image('../img/turist_bg.jpg');
 		& .container{
 			height: 100%;
 			padding: 100px 0;
@@ -128,11 +135,8 @@ body{
 		background-color: #232323;
 		opacity: .9;
 		padding: 50px 30px;
-		max-width: 50%;
-		.section--mountin &{
-		// position: absolute;
-		// right: 0; top: 0%;
-		}
+		max-width: 49%;
+		min-width: 49%;
 	}
 	&__title{
 		font: $text-font-bold;
@@ -140,6 +144,8 @@ body{
 		letter-spacing: 3px;
 		text-align: center;
 		margin: 0;
+		max-height: 94px;
+		overflow: hidden;
 	}
 	&__subtitle{
 		font-size: 22px;
@@ -147,6 +153,8 @@ body{
 		letter-spacing: 5px;
 		text-align: center;
 		margin: 20px 0 50px;
+		max-height: 44px;
+		overflow: hidden;
 	}
 	
 	&__anchor{
@@ -167,19 +175,44 @@ body{
 	&__mintitle{
 		font: $text-aleo-r;
 		font-size: 36px;
-		margin: 50px 0;
-		&--turist{
+		margin-top: 50px;
+		max-height: 60px;
+		overflow: hidden;
+		&--center{
 			text-align: center;
+			min-width: 250px;
+		}
+		&--turist{
+			margin-top: 0;
 		}
 	}
 	&__text{
-		max-width: 450px;
+		//
 		line-height: 1.7;
 		margin-bottom: 50px;
+		max-height: 150px;
+		overflow: hidden;
+		position: relative;
+		i {
+			position: absolute;
+			top: 15px;
+			left: 0;
+			color: #5474fd;
+		}
+		.section__speach & p:first-of-type {
+			text-indent: 20px;
+		}
+		.section--house &{
+			max-width: 100%;
+		}
+		.section--choose &{
+			max-width: 420px;
+		}
 		p{
 			margin: 20px 0;
 		}
-		&--bg{
+		&--title{
+			max-height: 80px;
 			margin-bottom: 30px;
 			font-size: 20px;
 			line-height: 1.3;
@@ -189,6 +222,7 @@ body{
 		}
 		.section--turist &{
 			max-width: 570px;
+			max-height: 135px;
 		}
 	}
 	&__img{
@@ -200,33 +234,96 @@ body{
 	&__icon{
 		@include flex-a(flex, column, center);
 	}
+	&__circle{
+		border-radius: 50%;
+		background-color: #232323;
+		width: 80px;
+		height: 80px;
+		position: relative;
+		& svg{
+			position: absolute;
+			top: 50%; left: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
 	&__wrap{
-		display: flex;
-		min-width: 100%;
+		& div .slide{
+			display: flex;
+			min-width: 100%;
+			height: 370px;
+			& .left{
+				width: 40%;
+			}
+			&:focus{
+				outline: none;
+			}
+		}
 	}
 	&__speach{
-		padding: 35px;
+		padding: 35px 45px;
 		background-color: #232323;
-		min-width: 660px;
+		max-height: 283px;
+		overfow: hidden;
+		width: 60%;
+		& .section__text{
+			max-width: 540px;
+		}
+	}
+}
+
+.slick{
+	&-arrow{
+		background: transparent;
+		border: 0;
+		position: absolute;
+	    bottom: 0;
+		display: inline-block;
+		width: 80px;
+		height: 50px;
+		opacity: .6;
+		border: 1px solid $text-color;
+		transition: opacity .25 ease-in;
+		background-image: url('../img/arrow.png');
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    font-size: 0;
+		&:hover,
+		&:focus{
+			outline: none;
+			opacity: 1;
+		}
+	}
+	&-prev{
+		right: 8%;
+		z-index: 1;
+	}
+	&-next{
+		right: 0;
+		transform: rotate(180deg);
+
 	}
 }
 .form{
 	font-size: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-align: center;
 	[class^="pe-"]{
 		font-size: 18px;
 	}
 	&__input{
-		height: 60px;
+		height: 56px;
 		font: $text-font;
 		font-size: 14px;
 		color: #232323;
 		letter-spacing: 1px;
-		line-height: 60px;
+		// line-height: 60px;
 		min-width: 500px;
 		text-align: center;
 		border: 1px solid $text-color;
 		vertical-align: middle;
+		text-overflow: ellipsis;
 		display: inline-block;
 		transition: all .25s ease;
 		&:focus::placeholder{
@@ -237,16 +334,17 @@ body{
 .btn{
 	background-color: #5474fd;
 	border: 1px solid $text-color;
-	height: 64px;
+	height: 60px;
 	font: $text-aleo-r;
 	letter-spacing: 2px;
-	line-height: 65px;
+	
 	text-align: center;
 	text-transform: uppercase;
 	vertical-align: middle;
 	display: inline-block;
 	padding: 0 35px;
 	transition: all .25s ease;
+	line-height: 60px;
 	& span{
 		display: inline-block;
 		vertical-align: middle;
@@ -271,5 +369,45 @@ body{
 		background-color: $text-color;
 		color: #5474fd;
 		border-left-color: #5474fd;
+	}
+}
+.footer{
+	.container{
+		@include flex-a(flex, column, center);
+		justify-content: space-between;
+		height: 100%;
+		padding: 100px 0 50px;
+	}
+	.logo {
+		display: block;
+		text-align: center;
+		margin-bottom: 15px;
+	}
+	&__text{
+		font-size: 16px;
+		letter-spacing: 1px;
+	}
+	&__nets{
+		margin: 0;
+		padding: 0;
+		text-align: center;
+		margin-top: 30px;
+	}
+	&__net{
+		display: inline-block;
+		vertical-align: middle;
+		& a{
+			transition: color .25s ease;
+			color: #fff;
+			&:hover,
+			&:focus,
+			&.active,
+			&:active{
+				color: #5474fd;
+			}
+		}	
+	}
+	&__net:not(:first-of-type){
+		margin-left: 15px;
 	}
 }

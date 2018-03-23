@@ -8,3 +8,9 @@
 	flex-direction: $direction;
 	align-items: $align;
 }
+@mixin background-image($src){
+    background-image: url($src);
+    background-repeat: no-repeat;
+    background-position: center;
+  //  background-size: contain;        
+}
